@@ -1,0 +1,86 @@
+public class Emprego {
+    private String nome;
+    private int idade;
+    private double salario;
+
+    public Emprego(String nome, int idade, double salario) {
+        this.nome = nome;
+        this.idade = idade;
+        this.salario = salario;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+  
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+   
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public void promover() {
+        if (idade > 18) {
+            aumentarSalario(25);
+        } else {
+            System.out.println("Empregado não pode ser promovido, idade insuficiente.");
+        }
+    }
+
+    public void aumentarSalario(double percentual) {
+        salario += salario * (percentual / 100);
+    }
+
+    public void demitir(int motivo) {
+        switch (motivo) {
+            case 1:
+                System.out.println("Empregado " + nome + " demitido por justa causa. Deve cumprir aviso prévio.");
+                break;
+            case 2:
+                double multa = salario * 0.40;
+                System.out.println("Empregado " + nome + " demitido por decisão do empregador. Multa de 40% do salário: R$" + multa);
+                break;
+            case 3:
+                double aposentadoria;
+                if (salario >= 1000 && salario < 2000) {
+                    aposentadoria = 1500;
+                } else if (salario >= 2000 && salario < 3000) {
+                    aposentadoria = 2500;
+                } else if (salario >= 3000 && salario < 4000) {
+                    aposentadoria = 3500;
+                } else {
+                    aposentadoria = 4000;
+                }
+                System.out.println("Empregado " + nome + " aposentado. Salário de aposentadoria: R$" + aposentadoria);
+                break;
+            default:
+                System.out.println("Motivo inválido.");
+                break;
+        }
+    }
+
+    public void fazerAniversario() {
+        idade += 1;
+    }
+
+    
+    public String toString() {
+        return "Nome: " + nome + ", Idade: " + idade + ", Salário: R$" + String.format("%.2f", salario);
+    }
+}
