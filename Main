@@ -1,0 +1,144 @@
+package ListaDeExercicio8;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import ListaDeExercicio8.Emprego;
+
+
+ 
+ public class EmpregoM {
+	 ArrayList<Emprego>EmpregoM;
+	 
+	 public EmpregoM() {
+	        EmpregoM = new ArrayList<>();
+	    }
+	 public void main(String[] args) {
+		  
+		 EmpregoM EmpregoM  = new EmpregoM();
+	        EmpregoM.menu();
+	 }
+	
+	 public void menu() {
+	        Scanner scanner = new Scanner(System.in);
+	        while (true) {
+	            System.out.println("\nMenu:");
+	            System.out.println("1. Criar novo empregado");
+	            System.out.println("2. Promover empregado");
+	            System.out.println("3. Aumentar salário do empregado");
+	            System.out.println("4. Demitir empregado");
+	            System.out.println("5. Fazer aniversário do empregado");
+	            System.out.println("6. Mostrar detalhes dos empregados");
+	            System.out.println("7. Sair");
+
+	            int opcao = scanner.nextInt();
+	            scanner.nextLine(); 
+
+	            switch (opcao) {
+	                case 1:
+	                    criarEmpregado(scanner);
+	                    break;
+	                case 2:
+	                    promoverEmpregado(scanner);
+	                    break;
+	                case 3:
+	                    aumentarSalarioEmpregado(scanner);
+	                    break;
+	                case 4:
+	                    demitirEmpregado(scanner);
+	                    break;
+	                case 5:
+	                    fazerAniversarioEmpregado(scanner);
+	                    break;
+	                case 6:
+	                    mostrarDetalhesEmpregados();
+	                    break;
+	                case 7:
+	                    scanner.close();
+	                    return;
+	                default:
+	                    System.out.println("Opção inválida!");
+	                    break;
+	            }
+	        }
+	    }
+
+	    private void criarEmpregado(Scanner scanner) {
+	        System.out.print("Digite o nome do empregado: ");
+	        String nome = scanner.nextLine();
+	        System.out.print("Digite a idade do empregado: ");
+	        int idade = scanner.nextInt();
+	        System.out.print("Digite o salário do empregado: ");
+	        double salario = scanner.nextDouble();
+	        Emprego empregadoM = new Emprego(nome, idade, salario);
+	        Emprego empregado = null;
+			EmpregoM.add(empregado);
+	        System.out.println("Empregado criado com sucesso!");
+	    }
+
+	    private void promoverEmpregado(Scanner scanner) {
+	        System.out.print("Digite o nome do empregado a ser promovido: ");
+	        String nome = scanner.nextLine();
+	        for (Emprego empregado : EmpregoM) {
+	            if (empregado.getNome().equals(nome)) {
+	                empregado.promover();
+	                System.out.println("Empregado promovido com sucesso!");
+	                return;
+	            }
+	        }
+	        System.out.println("Empregado não encontrado.");
+	    }
+
+	    private void aumentarSalarioEmpregado(Scanner scanner) {
+	        System.out.print("Digite o nome do empregado: ");
+	        String nome = scanner.nextLine();
+	        System.out.print("Digite o percentual de aumento: ");
+	        double percentual = scanner.nextDouble();
+	        for (Emprego empregado : EmpregoM) {
+	            if (empregado.getNome().equals(nome)) {
+	                empregado.aumentarSalario(percentual);
+	                System.out.println("Salário aumentado com sucesso!");
+	                return;
+	            }
+	        }
+	        System.out.println("Empregado não encontrado.");
+	    }
+
+	    private void demitirEmpregado(Scanner scanner) {
+	        System.out.print("Digite o nome do empregado a ser demitido: ");
+	        String nome = scanner.nextLine();
+	        System.out.print("Digite o motivo da demissão (1: Justa causa, 2: Decisão do empregador, 3: Aposentadoria): ");
+	        int motivo = scanner.nextInt();
+	        for (Emprego empregado : EmpregoM) {
+	            if (empregado.getNome().equals(nome)) {
+	                empregado.demitir(motivo);
+	                EmpregoM.remove(empregado);
+	                System.out.println("Empregado demitido com sucesso!");
+	                return;
+	            }
+	        }
+	        System.out.println("Empregado não encontrado.");
+	    }
+
+	    private void fazerAniversarioEmpregado(Scanner scanner) {
+	        System.out.print("Digite o nome do empregado: ");
+	        String nome = scanner.nextLine();
+	        for (Emprego empregado : EmpregoM) {
+	            if (empregado.getNome().equals(nome)) {
+	                empregado.fazerAniversario();
+	                System.out.println("Aniversário do empregado registrado com sucesso!");
+	                return;
+	            }
+	        }
+	        System.out.println("Empregado não encontrado.");
+	    }
+
+	    private void mostrarDetalhesEmpregados() {
+	        if (EmpregoM.isEmpty()) {
+	            System.out.println("Nenhum empregado registrado.");
+	        } else {
+	            for (Emprego empregado : EmpregoM) {
+	                System.out.println(empregado);
+	            }
+	        }
+	    }
+	} 
